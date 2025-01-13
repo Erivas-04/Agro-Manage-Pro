@@ -1,0 +1,25 @@
+.login{
+  padding: 50px 150px;
+}
+
+.submit-form-login {
+    margin-top: 5px;
+    width: 220px;
+}
+
+.login-form-input{
+    margin: 6px 4px;
+
+}
+
+.long{
+  display: flex;
+  justify-content: center; 
+  align-items: center;    
+  height: 100vh;
+}
+
+.long img {
+  max-width: 100%;  
+  height: auto;  
+}
