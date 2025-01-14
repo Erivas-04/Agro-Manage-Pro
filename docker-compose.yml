@@ -34,6 +34,7 @@ services:
     build: .
     command: >
       sh -c "./wait-for-it.sh db:3306 &&
+            chmod -R 777 /app/apps &&
             python manage.py migrate &&
             python manage.py runserver 0.0.0.0:8000"
     ports:
