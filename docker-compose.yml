@@ -1,6 +1,22 @@
-version: "3.9"
 services:
-  agromanageprodb:
+  frontend:
+    image: node:20
+    working_dir: /app
+    volumes:
+      - ./Agromanagepro-angular:/app
+      - node-modules:/app/node-modules
+    ports:
+      - "4200:4200"
+    command: >
+      sh -c "chmod -R 777 /app/node-modules &&
+             npm install &&
+             npm start"
+    depends_on:
+      - backend
+    networks:
+      - agromanagepro-net
+
+  db:
     image: mysql:8
     ports:
       - "3306:3306"
@@ -9,14 +25,26 @@ services:
       - MYSQL_DATABASE=agro-manage-pro-local
     volumes:
       - agromanagepro-data:/var/lib/mysql
-  agromanageproapi:
+    networks:
+      - agromanagepro-net
+
+  backend:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: >
+      sh -c "./wait-for-it.sh db:3306 &&
+            python manage.py migrate &&
+            python manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
     depends_on:
-      agromanageprodb:
-          condition: service_healthy
+      - db
+    volumes:
+      - .:/app
+    networks:
+      - agromanagepro-net
 
+networks:
+  agromanagepro-net:
 volumes:
   agromanagepro-data:
+  node-modules:
