@@ -11,6 +11,7 @@ services:
       sh -c "chmod -R 777 /app/node-modules &&
              npm install &&
              npm start"
+    container_name: agro-frontend
     depends_on:
       - backend
     networks:
@@ -23,6 +24,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=123123
       - MYSQL_DATABASE=agro-manage-pro-local
+    container_name: agro-db
     volumes:
       - agromanagepro-data:/var/lib/mysql
     networks:
@@ -36,6 +38,7 @@ services:
             python manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
+    container_name: agro-backend
     depends_on:
       - db
     volumes:
