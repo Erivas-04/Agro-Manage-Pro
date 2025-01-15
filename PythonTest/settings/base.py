@@ -1,8 +1,13 @@
 from pathlib import Path
 import os
-
+import environ
 
 from django.conf.global_settings import AUTH_USER_MODEL
+
+
+
+
+env = environ.Env(DEBUG=(bool, False))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -14,14 +19,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-#8u*qe*qh=^te14osd2gbty!@(u9c3#)i++y88bs9+u#m0*y0@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'RENDER' not in os.environ
-
-ALLOWED_HOSTS = []
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-
 # Application definition
 
 BASE_APPS = [
@@ -39,7 +36,8 @@ LOCAL_APPS = [
     'apps.cages',
     'apps.animals',
     'apps.login_logout',
-    'apps.reports'
+    'apps.reports',
+    'apps.supplies',
 ]
 
 THIRD_APPS = [

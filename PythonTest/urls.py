@@ -8,5 +8,6 @@ urlpatterns = [
     path('cage/', include("apps.cages.api.urls")),
     path('animal/', include("apps.animals.api.urls")),
     path('login/', include('apps.login_logout.urls')),
-    path('report/', include('apps.reports.api.urls'))
+    path('report/', include('apps.reports.api.urls')),
+    path('supplies/', include('apps.supplies.api.urls')),
 ]

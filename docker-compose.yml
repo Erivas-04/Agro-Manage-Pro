@@ -18,12 +18,19 @@ services:
       - agromanagepro-net
 
   db:
-    image: mysql:8
+    image: mariadb:10.4
+    command: ['mysqld', '--character-set-server=latin1', '--collation-server=latin1_swedish_ci']
     ports:
       - "3306:3306"
+    env_file:
+      - .env
     environment:
-      - MYSQL_ROOT_PASSWORD=123123
-      - MYSQL_DATABASE=agro-manage-pro-local
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_CHARSET=latin1
+      - MYSQL_COLLATION=latin1_swedish_ci
     container_name: agro-db
     volumes:
       - agromanagepro-data:/var/lib/mysql
@@ -31,9 +38,15 @@ services:
       - agromanagepro-net
 
   backend:
-    build: .
+    image: python:3.10
+    working_dir: /app
+    env_file:
+      - .env
+    environment:
+      - DJANGO_READ_DOT_ENV_FILE=True
     command: >
-      sh -c "./wait-for-it.sh db:3306 &&
+      sh -c "pip install -r requirements.txt --no-cache-dir &&
+            ./wait-for-it.sh db:3306 &&
             chmod -R 777 /app/apps &&
             python manage.py migrate &&
             python manage.py runserver 0.0.0.0:8000"
