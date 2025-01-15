@@ -4,9 +4,6 @@ import environ
 
 from django.conf.global_settings import AUTH_USER_MODEL
 
-
-
-
 env = environ.Env(DEBUG=(bool, False))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
