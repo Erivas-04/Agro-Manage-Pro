@@ -10,8 +10,8 @@ class Warehouse(models.Model):
     phone = models.CharField(max_length=100)
 
     class Meta:
-        verbose_name_plural = 'Warehouses'
-        verbose_name = 'Warehouse'
+        verbose_name_plural = 'Almacenes'
+        verbose_name = 'Almacen'
 
     def __str__(self):
         return self.name
@@ -24,8 +24,8 @@ class Supplies(models.Model):
     warehouse = models.ForeignKey(Warehouse, on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name_plural = 'Supplies'
-        verbose_name = 'Supply'
+        verbose_name_plural = 'Insumos'
+        verbose_name = 'Insumo'
 
     def __str__(self):
         return self.name

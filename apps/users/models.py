@@ -49,7 +49,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         (0, 'USER'),
         (1, 'ADMIN')
     )
-    role = models.PositiveSmallIntegerField(choices = ROLES)
+    role = models.PositiveSmallIntegerField(choices = ROLES, default = 0)
 
     class Meta:
         verbose_name = 'Usuario'
