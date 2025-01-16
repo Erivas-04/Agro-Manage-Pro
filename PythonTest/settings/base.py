@@ -122,11 +122,6 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:4200",
     "https://agromanagepro.vercel.app",
 ]
-CSRF_TRUSTED_ORIGINS = [
-    'https://localhost:8000',
-    'http://127.0.0.1:8000',
-    "http://localhost:4200",
-]
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
