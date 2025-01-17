@@ -13,7 +13,8 @@ class AnimalViewSerializer(serializers.ModelSerializer):
             'id_user': instance.user.id,
             'animal_name': instance.animal_name,
             'observations': instance.observations,
-            'hability': instance.hability
+            'hability': instance.hability,
+            'image': instance.image.url if instance.image else ""
         }
 
 class AnimalCreateUpdateSerializer(serializers.Serializer):

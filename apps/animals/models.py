@@ -16,6 +16,7 @@ class Animal(models.Model):
                                     null=True,
                                     blank=True)
     hability = models.BooleanField("Habilitado")
+    image = models.ImageField("Imagen de animal", upload_to='images/', null=True, blank=True)
 
     class Meta:
         verbose_name = 'Animal'

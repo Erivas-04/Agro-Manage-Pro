@@ -5,9 +5,9 @@ User = get_user_model()
 
 class Warehouse(models.Model):
     name = models.CharField(max_length=100)
-    creator = models.ForeignKey(User, on_delete=models.CASCADE)
+    creator = models.ForeignKey('company.UserAsigned', on_delete=models.CASCADE)
     company = models.ForeignKey('company.Company', on_delete=models.CASCADE)
-    phone = models.CharField(max_length=100)
+    phone = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         verbose_name_plural = 'Almacenes'
@@ -22,6 +22,7 @@ class Supplies(models.Model):
     company = models.ForeignKey('company.Company', on_delete=models.CASCADE)
     stock = models.IntegerField(default = 0)
     warehouse = models.ForeignKey(Warehouse, on_delete=models.CASCADE)
+    creator = models.ForeignKey('company.UserAsigned', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = 'Insumos'
